@@ -1,39 +1,13 @@
 import pandas as pd
 import numpy as np
 from scipy import stats
-import statsmodels.stats.weightstats as w
 
 chat_id = 371649437 # Ваш chat ID, не меняйте название переменной
 
 def solution(x: np.array, y: np.array) -> bool:
-    
-     # Одна или две выборке на входе, заполняется исходя из условия
-    # Измените код этой функции
-    # Это будет вашим решением
-    # Не меняйте название функции и её аргументы
-    # Ваш ответ, True или False
+
     alpha = 0.01
     
-#     p1 = x_success / x_cnt
-#     p2 = y_success / y_cnt
-#     p_comb = (x_success + y_success) / (x_cnt + y_cnt)
-#     difference = p1 - p2
- 
-#     z_value = difference / math.sqrt(
-#         p_comb * (1 - p_comb) * (1 / x_success + 1 / y_success)
-#     ) 
-#     distr = stats.norm(0, 1)  
-    
-#     p_value = (1 - distr.cdf(abs(z_value))) * 2 
-    
-#     if (p_value < alpha):
-#       return True
-#     else: 
-#       return False
-
-    #res = (w.ztest(control, test, alternative = 'two-sided').pvalue < alpha)
-    #_, pvalue = stats.ttest_ind(control, test, equal_var = False, alternative = 'greater')
-    #return res
     p_value = stats.permutation_test((x, y), lambda x, y, axis: np.mean(x, axis=axis) - np.mean(y, axis=axis), 
                  vectorized=True, 
                  n_resamples=5000,
