@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from scipy import stats
-import math
+import statsmodels.stats.weightstats as w
 
 chat_id = 371649437 # Ваш chat ID, не меняйте название переменной
 
@@ -31,7 +31,7 @@ def solution(control: np.array, test: np.array) -> bool:
 #     else: 
 #       return False
 
-    res = (stats.ks_2samp(control, test, alternative = 'two-sided').pvalue < alpha)
+    res = (w.ztest(control, test, alternative = 'two-sided').pvalue < alpha)
     return res
     
     
