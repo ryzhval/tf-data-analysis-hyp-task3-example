@@ -32,7 +32,7 @@ def solution(control: np.array, test: np.array) -> bool:
 #       return False
 
     #res = (w.ztest(control, test, alternative = 'two-sided').pvalue < alpha)
-    _, pvalue = w.ztest(control, test, alternative='two-sided')
+    _, pvalue = stats.ttest_ind(control, test, alternative='greater')
     #return res
     return pvalue <= 0.01
     
