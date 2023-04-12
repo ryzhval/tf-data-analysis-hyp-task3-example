@@ -5,7 +5,7 @@ import statsmodels.stats.weightstats as w
 
 chat_id = 371649437 # Ваш chat ID, не меняйте название переменной
 
-def solution(control: np.array, test: np.array) -> bool:
+def solution(x: np.array, y: np.array) -> bool:
     
      # Одна или две выборке на входе, заполняется исходя из условия
     # Измените код этой функции
@@ -32,8 +32,13 @@ def solution(control: np.array, test: np.array) -> bool:
 #       return False
 
     #res = (w.ztest(control, test, alternative = 'two-sided').pvalue < alpha)
-    _, pvalue = stats.ttest_ind(control, test, equal_var = False, alternative = 'greater')
+    #_, pvalue = stats.ttest_ind(control, test, equal_var = False, alternative = 'greater')
     #return res
-    return pvalue <= 0.01
+    p_value = stats.permutation_test((x, y), lambda x, y, axis: np.mean(x, axis=axis) - np.mean(y, axis=axis), 
+                 vectorized=True, 
+                 n_resamples=5000,
+                 alternative='greater').pvalue 
+    return p_value < alpha
+    return pvalue <= alpha
     
     
