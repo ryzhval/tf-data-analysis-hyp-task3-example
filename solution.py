@@ -31,7 +31,7 @@ def solution(control: np.array, test: np.array) -> bool:
 #     else: 
 #       return False
 
-    res = (stats.ttest_ind(control, test, alternative = "two-sided").pvalue < alpha)
+    res = (stats.ttest_ind(control, test, equal_var = False, alternative = 'two-sided').pvalue < alpha)
     return res
     
     
