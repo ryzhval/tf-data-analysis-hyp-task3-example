@@ -31,7 +31,7 @@ def solution(control: np.array, test: np.array) -> bool:
 #     else: 
 #       return False
 
-    res = (stats.ttest_rel(control, test, alternative = 'two-sided').pvalue < alpha)
+    res = (stats.ks_2samp(control, test, alternative = 'two-sided').pvalue < alpha)
     return res
     
     
